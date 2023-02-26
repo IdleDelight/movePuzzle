@@ -37,6 +37,11 @@ namespace movePuzzle
 			InitializeLevel();
 		}
 
+		public char this[int x, int y] {
+			get { return _cells[y, x]; }
+			set { _cells[y, x] = value; }
+		}
+
 		private void InitializeLevel()
 		{
 			for (int i = 0; i < _height; i++) {
@@ -51,17 +56,9 @@ namespace movePuzzle
 			}
 		}
 
-		public char this[int x, int y] {
-			get { return _cells[y, x]; }
-			set { _cells[y, x] = value; }
-		}
-
 		public void RenderLevel()
 		{
-			Console.Clear(); // clear the console
-
-			int score = 0;
-			Console.Write($"Score: /*???*/ \n");
+			Console.Clear();
 
 			for (int i = 0; i < _height; i++) {
 				for (int j = 0; j < _width; j++) {
@@ -69,6 +66,15 @@ namespace movePuzzle
 				}
 				Console.WriteLine();
 			}
+
+			//Console.SetCursorPosition(0, _level.Height);
+			Console.WriteLine("SCORE 00 | 00 MOVES");
+			Console.WriteLine();
+			Console.WriteLine("Use the arrow keys.");
+			Console.WriteLine("Reach flags before");
+			Console.WriteLine("they deplete.");
+			Console.WriteLine();
+			Console.WriteLine("[ Press X to Exit ]");
 		}
 
 		public void SetLevelWidth( int width )

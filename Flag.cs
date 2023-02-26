@@ -8,35 +8,18 @@ namespace movePuzzle
 		public int X { get; }
 		public int Y { get; }
 		public int Counter { get; set; }
+		public char FlagSymbol { get; set; }
 		public bool IsCollected { get; set; }
+		public bool IsScored { get; set; }
 
-		public Flag( int x, int y, int counter )
+		public Flag( int x, int y, char flagSymbol, int counter )
 		{
 			X = x;
 			Y = y;
 			Counter = counter;
+			FlagSymbol = flagSymbol;
 			IsCollected = false;
-		}
-
-		public void Update( Level level, int playerX, int playerY )
-		{
-			if (!IsCollected) {
-				if (playerX == X && playerY == Y) {
-					IsCollected = true;
-					level[X, Y] = '$';
-				}
-				else {
-					if (Counter > 9) {
-						level[X, Y] = '?';
-					}
-					else if (Counter >= 0) {
-						level[X, Y] = (char)('0' + Counter);
-					}
-					else {
-						level[X, Y] = 'X';
-					}
-				}
-			}
+			IsScored = false;
 		}
 	}
 }
