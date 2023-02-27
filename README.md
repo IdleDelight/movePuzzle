@@ -1,5 +1,6 @@
-# Move Puzzle
-## A Terminal Application To Move Pusle Written in C#
+# movePuzzle
+## A Terminal Application game where you collect flags before they deplete. 
+Written in C#
 
 
 #### Author IdleDelight
