@@ -66,32 +66,47 @@ namespace movePuzzle
 
 		private void PlayerUpdate()
 		{
-			// Move player & count moves
 			bool arrowKeyPressed = false;
 			ConsoleKeyInfo key = Console.ReadKey(true);
 
 			switch (key.Key) {
 				case ConsoleKey.LeftArrow:
-				if (_x > 1 && _level[_y, _x - 1] != '#') {
+				if (_level[_y, _x - 1] != '#') {
 					_x--;
+					arrowKeyPressed = true;
+				}
+				else {
+					_x = _level.Width - 2;
 					arrowKeyPressed = true;
 				}
 				break;
 				case ConsoleKey.RightArrow:
-				if (_x < _level.Width - 2 && _level[_y, _x + 1] != '#') {
+				if (_level[_y, _x + 1] != '#') {
 					_x++;
+					arrowKeyPressed = true;
+				}
+				else {
+					_x = 1;
 					arrowKeyPressed = true;
 				}
 				break;
 				case ConsoleKey.UpArrow:
-				if (_y > 1 && _level[_y - 1, _x] != '#') {
+				if (_level[_y - 1, _x] != '#') {
 					_y--;
+					arrowKeyPressed = true;
+				}
+				else {
+					_y = _level.Height - 2;
 					arrowKeyPressed = true;
 				}
 				break;
 				case ConsoleKey.DownArrow:
-				if (_y < _level.Height - 2 && _level[_y + 1, _x] != '#') {
+				if (_level[_y + 1, _x] != '#') {
 					_y++;
+					arrowKeyPressed = true;
+				}
+				else {
+					_y = 1;
 					arrowKeyPressed = true;
 				}
 				break;
@@ -99,12 +114,12 @@ namespace movePuzzle
 				ExitGame();
 				break;
 			}
+
 			if (arrowKeyPressed) {
 				moves++;
 			}
 
 			foreach (var flag in _flags) {
-				// Check if the player is on a flag and collect it
 				if (flag.Y == _y && flag.X == _x && flag.Counter >= 0 && !flag.IsCollected) {
 					flag.IsCollected = true;
 				}
