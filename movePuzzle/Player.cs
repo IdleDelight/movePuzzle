@@ -35,16 +35,24 @@ namespace movePuzzle
 				}
 			}
 			//// Define cursor
-			Console.CursorVisible = true;
+			Console.CursorVisible = false;
 			Console.CursorSize = 100;
+		}
+
+		public void SetDrawPlayer() 
+		{
+			Console.SetCursorPosition(_x, _y);
+			Console.ForegroundColor = ConsoleColor.Cyan;
+			//Console.BackgroundColor = ConsoleColor.Black;
+			Console.Write('@');
+			Console.ResetColor();
+			Console.SetCursorPosition(_x, _y);
 		}
 
 		public void UpdateGame()
 		{
 			// Set the cursor and draw player
-			Console.SetCursorPosition(_x, _y);
-			Console.Write('@');
-			Console.SetCursorPosition(Console.CursorLeft -1, Console.CursorTop);
+			SetDrawPlayer();
 
 			while (true) {
 				PlayerUpdate();
@@ -154,9 +162,7 @@ namespace movePuzzle
 			//}
 
 			// Set the cursor and draw player
-			Console.SetCursorPosition(_x, _y);
-			Console.Write('@');
-			Console.SetCursorPosition(_x, _y);
+			SetDrawPlayer();
 		}
 
 		private void MessageUI(string theMessageIs)

@@ -62,7 +62,14 @@ namespace movePuzzle
 
 			for (int i = 0; i < _height; i++) {
 				for (int j = 0; j < _width; j++) {
-					Console.Write(_cells[i, j]);
+					if (_cells[i, j] == '-' || _cells[i, j] == 'X') {
+						Console.ForegroundColor = ConsoleColor.DarkGray;
+						Console.Write(_cells[i, j]);
+						Console.ResetColor();
+					}
+					else {
+						Console.Write(_cells[i, j]);
+					}
 				}
 				Console.WriteLine();
 			}
