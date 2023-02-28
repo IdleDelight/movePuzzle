@@ -18,13 +18,19 @@ namespace movePuzzle
 			int levelHeight = 19;
 			int flagAmount = 15;
 			int flagCounter = 19;
-			level = new Level(levelWidth, levelHeight);
-			flags = new List<Flag>();
-			player = new Player(level, flags);
 
-			PlaceFlags(levelWidth, levelHeight,flagAmount, flagCounter);
-			level.RenderLevel();
-			player.UpdateGame();
+			bool playAgain = true;
+			while (playAgain) {
+
+				level = new Level(levelWidth, levelHeight);
+				flags = new List<Flag>();
+				player = new Player(level, flags);
+
+				PlaceFlags(levelWidth, levelHeight, flagAmount, flagCounter);
+				level.RenderLevel();
+				player.UpdateGame();
+				player.PlayAgain();
+			}
 		}
 
 		private void PlaceFlags( int levelWidth, int levelHeight, int flagAmount, int flagCounter )

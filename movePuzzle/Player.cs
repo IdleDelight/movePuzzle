@@ -36,13 +36,23 @@ namespace movePuzzle
 			}
 			//// Define cursor
 			Console.CursorVisible = false;
+			Console.CursorSize = 100;
+		}
+
+		public void SetDrawPlayer() 
+		{
+			Console.SetCursorPosition(_x, _y);
+			Console.ForegroundColor = ConsoleColor.Cyan;
+			//Console.BackgroundColor = ConsoleColor.Black;
+			Console.Write('@');
+			Console.ResetColor();
+			Console.SetCursorPosition(_x, _y);
 		}
 
 		public void UpdateGame()
 		{
 			// Set the cursor and draw player
-			Console.SetCursorPosition(_x, _y);
-			Console.Write('@');
+			SetDrawPlayer();
 
 			while (true) {
 				PlayerUpdate();
@@ -50,7 +60,6 @@ namespace movePuzzle
 				LevelUpdate();
 
 				if (EndGame()) {
-					PlayAgain();
 					break;
 				}
 			}
@@ -153,9 +162,7 @@ namespace movePuzzle
 			//}
 
 			// Set the cursor and draw player
-			Console.SetCursorPosition(_x, _y);
-			Console.Write('@');
-			Console.SetCursorPosition(_x, _y);
+			SetDrawPlayer();
 		}
 
 		private void MessageUI(string theMessageIs)
@@ -200,24 +207,46 @@ namespace movePuzzle
 			}
 		}
 
-		private bool PlayAgain()
+		public bool PlayAgain()
 		{
+			Console.CursorVisible = false;
+
 			_level.RenderLevel();
 
 			MessageUI(EndGameMessage());
-
+			
 			Console.WriteLine("[ PLAY AGAIN? Y/N ]");
 
-			ConsoleKeyInfo key = Console.ReadKey(true);
-			if (key.Key == ConsoleKey.Y) {
-				return true;
-			}
-			else if (key.Key == ConsoleKey.N) {
-				ExitGame();
-				return false;
-			}
-			else {
-				return PlayAgain();
+			while (true) {
+				ConsoleKeyInfo key = Console.ReadKey(true);
+				if (key.Key == ConsoleKey.Y) {
+
+					Console.SetCursorPosition(0, _level.Height + 6);
+
+					Console.Write("Restarting...     ");
+
+					int waitTime = 5000; // 5 seconds
+					int symbolIndex = 0;
+					char[] symbols = { '|', '/', '-', '\\' };
+
+					for (int i = 0; i < waitTime / 500; i++) {
+						Console.Write(symbols[symbolIndex]);
+						symbolIndex = (symbolIndex + 1) % symbols.Length;
+						Thread.Sleep(500);
+						Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+					}
+
+					Console.WriteLine();
+
+					return true;
+				}
+				else if (key.Key == ConsoleKey.N) {
+					ExitGame();
+				}
+				else {
+					Console.SetCursorPosition(0, _level.Height + 6);
+					Console.WriteLine("[ PICK EITHER Y/N ]");
+				}
 			}
 		}
 
@@ -225,9 +254,26 @@ namespace movePuzzle
 		{
 			_level.RenderLevel();
 
+			Console.CursorVisible = false;
+
 			MessageUI("UNTIL NEXT TIME");
 
-			Console.SetCursorPosition(0, _level.Height + 5);
+			Console.SetCursorPosition(0, _level.Height + 6);
+
+			Console.Write("Exiting...        ");
+
+			int waitTime = 5000; // 5 seconds
+			int symbolIndex = 0;
+			char[] symbols = { '|', '/', '-', '\\' };
+
+			for (int i = 0; i < waitTime / 500; i++) {
+				Console.Write(symbols[symbolIndex]);
+				symbolIndex = (symbolIndex + 1) % symbols.Length;
+				Thread.Sleep(500);
+				Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+			}
+
+			Console.WriteLine();
 
 			Environment.Exit(0);
 		}
