@@ -65,72 +65,72 @@ namespace movePuzzle
 		}
 
 		private void PlayerUpdate()
-		{
-			bool arrowKeyPressed = false;
-			ConsoleKeyInfo key = Console.ReadKey(true);
+{
+    bool arrowKeyPressed = false;
+    ConsoleKeyInfo key = Console.ReadKey(true);
 
-			switch (key.Key) {
-				case ConsoleKey.LeftArrow:
-				if (_level[_y, _x - 1] != '#') {
-					_x--;
-					arrowKeyPressed = true;
-				}
-				else {
-					_x = _level.Width - 2;
-					arrowKeyPressed = true;
-				}
-				break;
-				case ConsoleKey.RightArrow:
-				if (_level[_y, _x + 1] != '#') {
-					_x++;
-					arrowKeyPressed = true;
-				}
-				else {
-					_x = 1;
-					arrowKeyPressed = true;
-				}
-				break;
-				case ConsoleKey.UpArrow:
-				if (_level[_y - 1, _x] != '#') {
-					_y--;
-					arrowKeyPressed = true;
-				}
-				else {
-					_y = _level.Height - 2;
-					arrowKeyPressed = true;
-				}
-				break;
-				case ConsoleKey.DownArrow:
-				if (_level[_y + 1, _x] != '#') {
-					_y++;
-					arrowKeyPressed = true;
-				}
-				else {
-					_y = 1;
-					arrowKeyPressed = true;
-				}
-				break;
-				case ConsoleKey.X:
-				ExitGame();
-				break;
-			}
+    switch (key.Key) {
+        case ConsoleKey.LeftArrow:
+            if (_level[_y, _x - 1] != '#') {
+                _x--;
+                arrowKeyPressed = true;
+            }
+            else {
+                _x = _level.Width - 2;
+                arrowKeyPressed = true;
+            }
+            break;
+        case ConsoleKey.RightArrow:
+            if (_level[_y, _x + 1] != '#') {
+                _x++;
+                arrowKeyPressed = true;
+            }
+            else {
+                _x = 1;
+                arrowKeyPressed = true;
+            }
+            break;
+        case ConsoleKey.UpArrow:
+            if (_level[_y - 1, _x] != '#') {
+                _y--;
+                arrowKeyPressed = true;
+            }
+            else {
+                _y = _level.Height - 2;
+                arrowKeyPressed = true;
+            }
+            break;
+        case ConsoleKey.DownArrow:
+            if (_level[_y + 1, _x] != '#') {
+                _y++;
+                arrowKeyPressed = true;
+            }
+            else {
+                _y = 1;
+                arrowKeyPressed = true;
+            }
+            break;
+        case ConsoleKey.X:
+            ExitGame();
+            break;
+    }
 
-			if (arrowKeyPressed) {
-				moves++;
-			}
+    if (arrowKeyPressed) {
+        moves++;
+    }
 
-			foreach (var flag in _flags) {
-				if (flag.Y == _y && flag.X == _x && flag.Counter >= 0 && !flag.IsCollected) {
-					flag.IsCollected = true;
-				}
-			}
+    foreach (var flag in _flags) {
+        if (flag.Y == _y && flag.X == _x && flag.Counter >= 0 && !flag.IsCollected) {
+            flag.IsCollected = true;
+        }
+    }
 
-			foreach (var flag in _flags) {
-				if (arrowKeyPressed) {
-					flag.Counter--;
-				}
-			}
-		}
+    foreach (var flag in _flags) {
+        if (arrowKeyPressed) {
+            flag.Counter--;
+        }
+    }
+}
 
 		private void FlagUpdate()
 		{
@@ -202,19 +202,21 @@ namespace movePuzzle
 
 		private string EndGameMessage() 
 		{
+			int AmountOfFlags = _flags.Count;
+
 			_level.RenderLevel();
 
-			if (score > 7) {
+			if (score > AmountOfFlags * 0.75) {
 				return "R U CH3@T1NG!?!";
 			}
-			else if (score > 5) {
+			else if (score > AmountOfFlags * 0.5) {
 				return "EXCELLENT WIN!!";
 			}
-			else if (score > 2) {
+			else if (score > AmountOfFlags * 0.25) {
 				return "NOT TOO SHABBY!";
 			}
 			else if (score > 0) {
-				return  "WELL DONE CHAMP";
+				return "GO GET EM BUDDY";
 			}
 			else {
 				return " =[GAME OVER]= ";
