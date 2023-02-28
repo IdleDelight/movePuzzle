@@ -44,7 +44,7 @@ namespace movePuzzle
 			for (int i = 0; i < flagAmount; i++) {
 				int ranW = random.Next(1, maxW);
 				int ranH = random.Next(1, maxH);
-				char flSym = '=';
+				char flSym = '·';
 
 				double distanceFromCenter = Math.Sqrt(Math.Pow(levelWidth / 2 - ranW, 2) + Math.Pow(levelHeight / 2 - ranH, 2));
 

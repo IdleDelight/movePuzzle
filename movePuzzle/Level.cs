@@ -50,7 +50,7 @@ namespace movePuzzle
 						_cells[i, j] = '#';
 					}
 					else {
-						_cells[i, j] = '-';
+						_cells[i, j] = ' ';
 					}
 				}
 			}
@@ -62,7 +62,7 @@ namespace movePuzzle
 
 			for (int i = 0; i < _height; i++) {
 				for (int j = 0; j < _width; j++) {
-					if (_cells[i, j] == '-' || _cells[i, j] == '=' || _cells[i, j] == '?') {
+					if (_cells[i, j] == '·' || _cells[i, j] == '¤' || _cells[i, j] == '?') {
 						Console.ForegroundColor = ConsoleColor.DarkGray;
 						Console.Write(_cells[i, j]);
 						Console.ResetColor();
@@ -118,16 +118,6 @@ namespace movePuzzle
 			_height = height;
 			_cells = new char[_height, _width];
 			InitializeLevel();
-		}
-	}
-
-	public static class ConsoleExtensions
-	{
-		public static void WriteColored( this string text, ConsoleColor color )
-		{
-			Console.ForegroundColor = color;
-			Console.Write(text);
-			Console.ResetColor();
 		}
 	}
 }

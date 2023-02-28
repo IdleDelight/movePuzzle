@@ -148,6 +148,9 @@ namespace movePuzzle
 				else if (flag.Counter < 0 && !flag.IsCollected) {
 					flag.FlagSymbol = 'X';
 				}
+				else if (flag.Counter > 19 && !flag.IsCollected) {
+					flag.FlagSymbol = '·';
+				}
 				else if (flag.Counter > 14 && !flag.IsCollected) {
 					flag.FlagSymbol = '¤';
 				}
@@ -197,9 +200,18 @@ namespace movePuzzle
 
 			Console.SetCursorPosition(0, _level.Height + 2);
 			Console.WriteLine("###################");
-			Console.WriteLine($"# {theMessageIs} #");
+			Console.Write("# ");
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			Console.Write(theMessageIs);
+			Console.ResetColor();
+			Console.WriteLine(" #");
 			Console.WriteLine("###################");
 			Console.SetCursorPosition(0, _level.Height + 6);
+			//Console.SetCursorPosition(0, _level.Height + 2);
+			//Console.WriteLine("###################");
+			//Console.WriteLine($"# {theMessageIs} #");
+			//Console.WriteLine("###################");
+			//Console.SetCursorPosition(0, _level.Height + 6);
 		}
 
 		private bool EndGame()
@@ -243,7 +255,10 @@ namespace movePuzzle
 
 			MessageUI(EndGameMessage());
 			
-			Console.WriteLine("[ PLAY AGAIN? Y/N ]");
+			//Console.WriteLine("[ PLAY AGAIN? Y/N ]");
+			Console.Write("[ ");
+			"PLAY AGAIN?".WriteColored(ConsoleColor.DarkGray);
+			Console.WriteLine(" Y/N ]");
 
 			while (true) {
 				ConsoleKeyInfo key = Console.ReadKey(true);
@@ -251,7 +266,7 @@ namespace movePuzzle
 
 					Console.SetCursorPosition(0, _level.Height + 6);
 
-					Console.Write("Restarting...     ");
+					"Restarting...     ".WriteColored(ConsoleColor.DarkGray);
 
 					ProcessingAnim();
 
@@ -279,7 +294,7 @@ namespace movePuzzle
 
 			Console.SetCursorPosition(0, _level.Height + 6);
 
-			Console.Write("Exiting...        ");
+			"Exiting...        ".WriteColored(ConsoleColor.DarkGray);
 
 			ProcessingAnim();
 
