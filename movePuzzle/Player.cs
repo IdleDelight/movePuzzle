@@ -148,6 +148,9 @@ namespace movePuzzle
 				else if (flag.Counter < 0 && !flag.IsCollected) {
 					flag.FlagSymbol = 'X';
 				}
+				else if (flag.Counter > 14 && !flag.IsCollected) {
+					flag.FlagSymbol = '¤';
+				}
 				else if (flag.Counter > 9 && !flag.IsCollected) {
 					flag.FlagSymbol = '?';
 				}

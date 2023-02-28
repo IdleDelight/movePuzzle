@@ -62,8 +62,18 @@ namespace movePuzzle
 
 			for (int i = 0; i < _height; i++) {
 				for (int j = 0; j < _width; j++) {
-					if (_cells[i, j] == '-' || _cells[i, j] == 'X') {
+					if (_cells[i, j] == '-' || _cells[i, j] == '=' || _cells[i, j] == '?') {
 						Console.ForegroundColor = ConsoleColor.DarkGray;
+						Console.Write(_cells[i, j]);
+						Console.ResetColor();
+					}
+					else if (_cells[i, j] == '$') {
+						Console.ForegroundColor = ConsoleColor.DarkGreen;
+						Console.Write(_cells[i, j]);
+						Console.ResetColor();
+					}
+					else if (_cells[i, j] == 'X') {
+						Console.ForegroundColor = ConsoleColor.DarkRed;
 						Console.Write(_cells[i, j]);
 						Console.ResetColor();
 					}
@@ -75,13 +85,25 @@ namespace movePuzzle
 			}
 
 			//Console.SetCursorPosition(0, _level.Height);
-			Console.WriteLine("SCORE 00 | 00 MOVES");
-			Console.WriteLine();
+			//Console.WriteLine("SCORE 00 | 00 MOVES");
+			"SCORE ".WriteColored(ConsoleColor.DarkGray);
+			Console.Write("00");
+			" | ".WriteColored(ConsoleColor.DarkGray);
+			Console.Write("00");
+			" MOVES\n\n".WriteColored(ConsoleColor.DarkGray);
 			Console.WriteLine("Use the arrow keys.");
 			Console.WriteLine("Reach flags before");
 			Console.WriteLine("they deplete.");
 			Console.WriteLine();
-			Console.WriteLine("[ Press X to Exit ]");
+			// Console.WriteLine("[ Press X to Exit ]");
+			Console.Write("[ ");
+			"Press".WriteColored(ConsoleColor.DarkGray);
+			Console.Write(" X ");
+			"to Exit".WriteColored(ConsoleColor.DarkGray);
+			Console.Write(" ]");
+
+
+
 		}
 
 		public void SetLevelWidth( int width )
@@ -96,6 +118,16 @@ namespace movePuzzle
 			_height = height;
 			_cells = new char[_height, _width];
 			InitializeLevel();
+		}
+	}
+
+	public static class ConsoleExtensions
+	{
+		public static void WriteColored( this string text, ConsoleColor color )
+		{
+			Console.ForegroundColor = color;
+			Console.Write(text);
+			Console.ResetColor();
 		}
 	}
 }
