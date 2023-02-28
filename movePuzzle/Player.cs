@@ -36,7 +36,6 @@ namespace movePuzzle
 			}
 			//// Define cursor
 			Console.CursorVisible = false;
-			Console.CursorSize = 100;
 		}
 
 		public void SetDrawPlayer() 
