@@ -187,7 +187,14 @@ namespace movePuzzle
 		private void MessageUI(string theMessageIs)
 		{
 			Console.SetCursorPosition(0, _level.Height);
-			Console.WriteLine($"SCORE {score:00} | {moves:00} MOVES");
+			//Console.WriteLine($"SCORE {score:00} | {moves:00} MOVES");
+
+			"SCORE ".WriteColored(ConsoleColor.DarkGray);
+			Console.Write($"{score:00}");
+			" | ".WriteColored(ConsoleColor.DarkGray);
+			Console.Write($"{moves:00}");
+			" MOVES\n".WriteColored(ConsoleColor.DarkGray);
+
 			Console.SetCursorPosition(0, _level.Height + 2);
 			Console.WriteLine("###################");
 			Console.WriteLine($"# {theMessageIs} #");
