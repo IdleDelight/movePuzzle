@@ -33,6 +33,8 @@ namespace movePuzzle
 			}
 		}
 
+		// Testing flagCounter slightly relative to placement in correlation to center.
+		// Higher counter further from center.
 		private void PlaceFlags( int levelWidth, int levelHeight, int flagAmount, int flagCounter )
 		{
 			int maxW = levelWidth - 1;
