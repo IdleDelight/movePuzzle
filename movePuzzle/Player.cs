@@ -224,16 +224,7 @@ namespace movePuzzle
 
 					Console.Write("Restarting...     ");
 
-					int waitTime = 5000; // 5 seconds
-					int symbolIndex = 0;
-					char[] symbols = { '|', '/', '-', '\\' };
-
-					for (int i = 0; i < waitTime / 500; i++) {
-						Console.Write(symbols[symbolIndex]);
-						symbolIndex = (symbolIndex + 1) % symbols.Length;
-						Thread.Sleep(500);
-						Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
-					}
+					ProcessingAnim();
 
 					Console.WriteLine();
 
@@ -261,20 +252,25 @@ namespace movePuzzle
 
 			Console.Write("Exiting...        ");
 
-			int waitTime = 5000; // 5 seconds
-			int symbolIndex = 0;
-			char[] symbols = { '|', '/', '-', '\\' };
-
-			for (int i = 0; i < waitTime / 500; i++) {
-				Console.Write(symbols[symbolIndex]);
-				symbolIndex = (symbolIndex + 1) % symbols.Length;
-				Thread.Sleep(500);
-				Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
-			}
+			ProcessingAnim();
 
 			Console.WriteLine();
 
 			Environment.Exit(0);
+		}
+
+		private void ProcessingAnim()
+		{
+			int waitTime = 2150; // 5 seconds
+			int symbolIndex = 0;
+			char[] symbols = { '|', '/', '-', '\\' };
+
+			for (int i = 0; i < waitTime / 150; i++) {
+				Console.Write(symbols[symbolIndex]);
+				symbolIndex = (symbolIndex + 1) % symbols.Length;
+				Thread.Sleep(150);
+				Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+			}
 		}
 	}
 }
