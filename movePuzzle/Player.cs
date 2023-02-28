@@ -168,7 +168,7 @@ namespace movePuzzle
 			Console.SetCursorPosition(0, _level.Height);
 			Console.Write($"SCORE {score:00} | {moves:00} MOVES");
 
-			Console.WriteLine($"*** {_flags.Count} ***");
+			//Console.WriteLine($"\n*** {_flags.Count} ***");
 
 			//Console.WriteLine($"\n#P x:{_x}|{_y}:y");
 			//int itr = 1;
