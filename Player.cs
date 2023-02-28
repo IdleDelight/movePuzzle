@@ -35,7 +35,6 @@ namespace movePuzzle
 				}
 			}
 			//// Define cursor
-			//Console.CursorSize = 100;
 			Console.CursorVisible = false;
 		}
 
