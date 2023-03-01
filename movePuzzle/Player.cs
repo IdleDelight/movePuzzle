@@ -17,6 +17,7 @@ namespace movePuzzle
 		private char[,] _initialLevelState;
 		private int moves = 0;
 		private int score = 0;
+		private bool displayMessage = false;
 
 		public Player( Level level, List<Flag> flags )
 		{
@@ -176,14 +177,20 @@ namespace movePuzzle
 				if (aFlag.Counter >= 0 && !aFlag.IsScored) {
 					aFlag.Counter++;
 					aFlag.Counter++;
+					displayMessage = true;
 				}
 			}
 		}
 
 		private void LevelUpdate()
 		{
-			
+			if (displayMessage == true) {
+				ScoringUiMessage();
+				displayMessage = false;
+			}
+			else {
 			_level.RenderLevel();
+			}
 
 			// Display the current score and moves
 			Console.SetCursorPosition(0, _level.Height);
@@ -228,15 +235,12 @@ namespace movePuzzle
 			//Console.SetCursorPosition(0, _level.Height + 6);
 		}
 
-
 		private void ScoringUiMessage() 
 		{
-			Console.CursorVisible = false;
-
-			_level.RenderLevel();
-
-			MessageUI("⇑⇑ COUNTER++ ⇑⇑");
+				_level.RenderLevel();
+				MessageUI("FLAG COUNTERS++");
 		}
+
 		private bool EndGame()
 		{
 			foreach (var flag in _flags) {
@@ -273,8 +277,6 @@ namespace movePuzzle
 		public bool PlayAgain()
 		{
 			Console.CursorVisible = false;
-
-			_level.RenderLevel();
 
 			MessageUI(EndGameMessage());
 			
