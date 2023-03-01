@@ -71,7 +71,7 @@ namespace movePuzzle
 
     switch (key.Key) {
         case ConsoleKey.LeftArrow:
-            if (_level[_y, _x - 1] != '#') {
+            if (_level[_y, _x - 1] != '║' && _level[_y, _x - 1] != '═' && _level[_y, _x - 1] != '╔' && _level[_y, _x - 1] != '╗' && _level[_y, _x - 1] != '╚' && _level[_y, _x - 1] != '╝' ) {
                 _x--;
                 arrowKeyPressed = true;
             }
@@ -81,8 +81,8 @@ namespace movePuzzle
             }
             break;
         case ConsoleKey.RightArrow:
-            if (_level[_y, _x + 1] != '#') {
-                _x++;
+            if (_level[_y, _x + 1] != '║' && _level[_y, _x + 1] != '═' && _level[_y, _x + 1] != '╔' && _level[_y, _x + 1] != '╗' && _level[_y, _x + 1] != '╚' && _level[_y, _x + 1] != '╝') {
+					_x++;
                 arrowKeyPressed = true;
             }
             else {
@@ -91,7 +91,7 @@ namespace movePuzzle
             }
             break;
         case ConsoleKey.UpArrow:
-            if (_level[_y - 1, _x] != '#') {
+            if (_level[_y - 1, _x] != '║' && _level[_y - 1, _x] != '═' && _level[_y - 1, _x] != '╔' && _level[_y - 1, _x] != '╗' && _level[_y - 1, _x] != '╚' && _level[_y - 1, _x] != '╝') {
                 _y--;
                 arrowKeyPressed = true;
             }
@@ -101,7 +101,7 @@ namespace movePuzzle
             }
             break;
         case ConsoleKey.DownArrow:
-            if (_level[_y + 1, _x] != '#') {
+            if (_level[_y + 1, _x] != '║' && _level[_y + 1, _x] != '═' && _level[_y + 1, _x] != '╔' && _level[_y + 1, _x] != '╗' && _level[_y + 1, _x] != '╚' && _level[_y + 1, _x] != '╝') {
                 _y++;
                 arrowKeyPressed = true;
             }
@@ -199,13 +199,13 @@ namespace movePuzzle
 			" MOVES\n".WriteColored(ConsoleColor.DarkGray);
 
 			Console.SetCursorPosition(0, _level.Height + 2);
-			Console.WriteLine("###################");
-			Console.Write("# ");
+			Console.WriteLine("┌─────────────────┐");
+			Console.Write("│ ");
 			Console.ForegroundColor = ConsoleColor.Yellow;
 			Console.Write(theMessageIs);
 			Console.ResetColor();
-			Console.WriteLine(" #");
-			Console.WriteLine("###################");
+			Console.WriteLine(" │");
+			Console.WriteLine("└─────────────────┘");
 			Console.SetCursorPosition(0, _level.Height + 6);
 			//Console.SetCursorPosition(0, _level.Height + 2);
 			//Console.WriteLine("###################");
@@ -279,7 +279,10 @@ namespace movePuzzle
 				}
 				else {
 					Console.SetCursorPosition(0, _level.Height + 6);
-					Console.WriteLine("[ PICK EITHER Y/N ]");
+					//Console.WriteLine("[ PICK EITHER Y/N ]");
+					Console.Write("[ ");
+					"PICK EITHER".WriteColored(ConsoleColor.DarkGray);
+					Console.WriteLine(" Y/N ]");
 				}
 			}
 		}
@@ -307,7 +310,7 @@ namespace movePuzzle
 		{
 			int waitTime = 2150; // 5 seconds
 			int symbolIndex = 0;
-			char[] symbols = { '|', '/', '-', '\\' };
+			char[] symbols = { '|', '/', '─', '\\' };
 
 			for (int i = 0; i < waitTime / 150; i++) {
 				Console.Write(symbols[symbolIndex]);

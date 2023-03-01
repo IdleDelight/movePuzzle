@@ -44,10 +44,32 @@ namespace movePuzzle
 
 		private void InitializeLevel()
 		{
+			char verticalBorder = '║';
+			char horizontalBorder = '═';
+			char topLeftCorner = '╔';
+			char topRightCorner = '╗';
+			char bottomLeftCorner = '╚';
+			char bottomRightCorner = '╝';
+
 			for (int i = 0; i < _height; i++) {
 				for (int j = 0; j < _width; j++) {
-					if (i == 0 || i == _height - 1 || j == 0 || j == _width - 1) {
-						_cells[i, j] = '#';
+					if (i == 0 && j == 0) {
+						_cells[i, j] = topLeftCorner;
+					}
+					else if (i == 0 && j == _width - 1) {
+						_cells[i, j] = topRightCorner;
+					}
+					else if (i == _height - 1 && j == 0) {
+						_cells[i, j] = bottomLeftCorner;
+					}
+					else if (i == _height - 1 && j == _width - 1) {
+						_cells[i, j] = bottomRightCorner;
+					}
+					else if (i == 0 || i == _height - 1) {
+						_cells[i, j] = horizontalBorder;
+					}
+					else if (j == 0 || j == _width - 1) {
+						_cells[i, j] = verticalBorder;
 					}
 					else {
 						_cells[i, j] = ' ';
