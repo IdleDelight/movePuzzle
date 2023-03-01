@@ -249,7 +249,7 @@ namespace movePuzzle
 
 		private string EndGameMessage() 
 		{
-			int AmountOfFlags = _flags.Count / 2;
+			int AmountOfFlags = _flags.Count;
 
 			_level.RenderLevel();
 
