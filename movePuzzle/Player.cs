@@ -139,6 +139,7 @@ namespace movePuzzle
 				if (flag.IsCollected && !flag.IsScored) {
 					score++;
 					flag.IsScored = true;
+					IncreaseActiveFlagCounter();
 				}
 
 				// Update flag symbols
@@ -169,8 +170,19 @@ namespace movePuzzle
 			}
 		}
 
+		private void IncreaseActiveFlagCounter()
+		{
+			foreach (var aFlag in _flags) {
+				if (aFlag.Counter >= 0 && !aFlag.IsScored) {
+					aFlag.Counter++;
+					aFlag.Counter++;
+				}
+			}
+		}
+
 		private void LevelUpdate()
 		{
+			
 			_level.RenderLevel();
 
 			// Display the current score and moves
@@ -216,6 +228,15 @@ namespace movePuzzle
 			//Console.SetCursorPosition(0, _level.Height + 6);
 		}
 
+
+		private void ScoringUiMessage() 
+		{
+			Console.CursorVisible = false;
+
+			_level.RenderLevel();
+
+			MessageUI("⇑⇑ COUNTER++ ⇑⇑");
+		}
 		private bool EndGame()
 		{
 			foreach (var flag in _flags) {
