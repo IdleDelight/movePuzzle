@@ -39,16 +39,6 @@ namespace movePuzzle
 			Console.CursorVisible = false;
 		}
 
-		public void SetDrawPlayer() 
-		{
-			Console.SetCursorPosition(_x, _y);
-			Console.ForegroundColor = ConsoleColor.Cyan;
-			//Console.BackgroundColor = ConsoleColor.Black;
-			Console.Write('@');
-			Console.ResetColor();
-			Console.SetCursorPosition(_x, _y);
-		}
-
 		public void UpdateGame()
 		{
 			// Set the cursor and draw player
@@ -63,6 +53,16 @@ namespace movePuzzle
 					break;
 				}
 			}
+		}
+
+		public void SetDrawPlayer()
+		{
+			Console.SetCursorPosition(_x, _y);
+			Console.ForegroundColor = ConsoleColor.Cyan;
+			//Console.BackgroundColor = ConsoleColor.Black;
+			Console.Write('@');
+			Console.ResetColor();
+			Console.SetCursorPosition(_x, _y);
 		}
 
 		private void PlayerUpdate()

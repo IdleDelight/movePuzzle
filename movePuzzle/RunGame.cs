@@ -17,7 +17,7 @@ namespace movePuzzle
 			int levelWidth = 19;
 			int levelHeight = 19;
 			int flagAmount = 25;
-			int flagCounter = 25;
+			int flagCounterMax = 25;
 
 			bool playAgain = true;
 			while (playAgain) {
@@ -26,7 +26,7 @@ namespace movePuzzle
 				flags = new List<Flag>();
 				player = new Player(level, flags);
 
-				PlaceFlags(levelWidth, levelHeight, flagAmount, flagCounter);
+				PlaceFlags(levelWidth, levelHeight, flagAmount, flagCounterMax);
 				level.RenderLevel();
 				player.UpdateGame();
 				player.PlayAgain();
