@@ -106,8 +106,6 @@ namespace movePuzzle
 				Console.WriteLine();
 			}
 
-			//Console.SetCursorPosition(0, _level.Height);
-			//Console.WriteLine("SCORE 00 | 00 MOVES");
 			"SCORE ".WriteColored(ConsoleColor.DarkGray);
 			Console.Write("00");
 			" | ".WriteColored(ConsoleColor.DarkGray);
@@ -117,7 +115,7 @@ namespace movePuzzle
 			Console.WriteLine("Reach flags before");
 			Console.WriteLine("they deplete.");
 			Console.WriteLine();
-			// Console.WriteLine("[ Press X to Exit ]");
+			
 			Console.Write("[ ");
 			"Press".WriteColored(ConsoleColor.DarkGray);
 			Console.Write(" X ");

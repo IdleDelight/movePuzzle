@@ -231,11 +231,6 @@ namespace movePuzzle
 			Console.WriteLine(" │");
 			Console.WriteLine("└─────────────────┘");
 			Console.SetCursorPosition(0, _level.Height + 6);
-			//Console.SetCursorPosition(0, _level.Height + 2);
-			//Console.WriteLine("###################");
-			//Console.WriteLine($"# {theMessageIs} #");
-			//Console.WriteLine("###################");
-			//Console.SetCursorPosition(0, _level.Height + 6);
 		}
 
 		private void ScoringUiMessage()
@@ -283,7 +278,6 @@ namespace movePuzzle
 
 			MessageUI(EndGameMessage());
 
-			//Console.WriteLine("[ PLAY AGAIN? Y/N ]");
 			Console.Write("[ ");
 			"PLAY AGAIN?".WriteColored(ConsoleColor.DarkGray);
 			Console.WriteLine(" Y/N ]");
@@ -307,7 +301,6 @@ namespace movePuzzle
 				}
 				else {
 					Console.SetCursorPosition(0, _level.Height + 6);
-					//Console.WriteLine("[ PICK EITHER Y/N ]");
 					Console.Write("[ ");
 					"PICK EITHER".WriteColored(ConsoleColor.DarkGray);
 					Console.WriteLine(" Y/N ]");
@@ -336,7 +329,7 @@ namespace movePuzzle
 
 		private void ProcessingAnim()
 		{
-			int waitTime = 2150; // 5 seconds
+			int waitTime = 2150;
 			int symbolIndex = 0;
 			char[] symbols = { '|', '/', '─', '\\' };
 

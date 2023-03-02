@@ -33,8 +33,6 @@ namespace movePuzzle
 			}
 		}
 
-		// Testing flagCounter slightly relative to placement in correlation to center.
-		// Higher counter further from center.
 		private void PlaceFlags( int levelWidth, int levelHeight, int flagAmount, int flagCounter )
 		{
 			int maxW = levelWidth - 1;
@@ -50,7 +48,7 @@ namespace movePuzzle
 
 				int ranC = (int)((flagCounter * distanceFromCenter) /10);
 
-				ranC = ranC < 1 ? 1 : ranC; // ensure the flag counter is at least 1
+				ranC = ranC < 1 ? 1 : ranC;
 
 				flags.Add(new Flag(ranW, ranH, flSym, ranC));
 			}
@@ -59,28 +57,5 @@ namespace movePuzzle
 				level[flag.X, flag.Y] = flag.FlagSymbol;
 			}
 		}
-
-		// OLD PLACING FLAGS - NOT TAKING CENTER INTO ACCOUNT
-
-		//private void PlaceFlags( int levelWidth, int levelHeight, int flagAmount, int flagCounter )
-		//{
-		//	int maxW = levelWidth - 1;
-		//	int maxH = levelHeight - 1;
-
-		//	Random random = new Random();
-
-		//	for (int i = 0; i < flagAmount; i++) {
-		//		int ranW = random.Next(1, maxW);
-		//		int ranH = random.Next(1, maxH);
-		//		char flSym = '¤';
-		//		int ranC = random.Next(2, flagCounter);
-
-		//		flags.Add(new Flag(ranW, ranH, flSym, ranC));
-		//	}
-
-		//	foreach (var flag in flags) {
-		//		level[flag.X, flag.Y] = flag.FlagSymbol;
-		//	}
-		//}
 	}
 }
