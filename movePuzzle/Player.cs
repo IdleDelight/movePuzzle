@@ -66,72 +66,74 @@ namespace movePuzzle
 		}
 
 		private void PlayerUpdate()
-{
-    bool arrowKeyPressed = false;
-    ConsoleKeyInfo key = Console.ReadKey(true);
+		{
+			bool arrowKeyPressed = false;
+			ConsoleKeyInfo key = Console.ReadKey(true);
 
-    switch (key.Key) {
-        case ConsoleKey.LeftArrow:
-            if (_level[_y, _x - 1] != '║' && _level[_y, _x - 1] != '═' && _level[_y, _x - 1] != '╔' && _level[_y, _x - 1] != '╗' && _level[_y, _x - 1] != '╚' && _level[_y, _x - 1] != '╝' ) {
-                _x--;
-                arrowKeyPressed = true;
-            }
-            else {
-                _x = _level.Width - 2;
-                arrowKeyPressed = true;
-            }
-            break;
-        case ConsoleKey.RightArrow:
-            if (_level[_y, _x + 1] != '║' && _level[_y, _x + 1] != '═' && _level[_y, _x + 1] != '╔' && _level[_y, _x + 1] != '╗' && _level[_y, _x + 1] != '╚' && _level[_y, _x + 1] != '╝') {
+			switch (key.Key) {
+				case ConsoleKey.LeftArrow:
+				if (_level[_y, _x - 1] != '║' && _level[_y, _x - 1] != '═' && _level[_y, _x - 1] != '╔' && _level[_y, _x - 1] != '╗' && _level[_y, _x - 1] != '╚' && _level[_y, _x - 1] != '╝') {
+					_x--;
+					arrowKeyPressed = true;
+				}
+				else {
+					_x = _level.Width - 2;
+					arrowKeyPressed = true;
+				}
+				break;
+				case ConsoleKey.RightArrow:
+				if (_level[_y, _x + 1] != '║' && _level[_y, _x + 1] != '═' && _level[_y, _x + 1] != '╔' && _level[_y, _x + 1] != '╗' && _level[_y, _x + 1] != '╚' && _level[_y, _x + 1] != '╝') {
 					_x++;
-                arrowKeyPressed = true;
-            }
-            else {
-                _x = 1;
-                arrowKeyPressed = true;
-            }
-            break;
-        case ConsoleKey.UpArrow:
-            if (_level[_y - 1, _x] != '║' && _level[_y - 1, _x] != '═' && _level[_y - 1, _x] != '╔' && _level[_y - 1, _x] != '╗' && _level[_y - 1, _x] != '╚' && _level[_y - 1, _x] != '╝') {
-                _y--;
-                arrowKeyPressed = true;
-            }
-            else {
-                _y = _level.Height - 2;
-                arrowKeyPressed = true;
-            }
-            break;
-        case ConsoleKey.DownArrow:
-            if (_level[_y + 1, _x] != '║' && _level[_y + 1, _x] != '═' && _level[_y + 1, _x] != '╔' && _level[_y + 1, _x] != '╗' && _level[_y + 1, _x] != '╚' && _level[_y + 1, _x] != '╝') {
-                _y++;
-                arrowKeyPressed = true;
-            }
-            else {
-                _y = 1;
-                arrowKeyPressed = true;
-            }
-            break;
-        case ConsoleKey.X:
-            ExitGame();
-            break;
-    }
+					arrowKeyPressed = true;
+				}
+				else {
+					_x = 1;
+					arrowKeyPressed = true;
+				}
+				break;
+				case ConsoleKey.UpArrow:
+				if (_level[_y - 1, _x] != '║' && _level[_y - 1, _x] != '═' && _level[_y - 1, _x] != '╔' && _level[_y - 1, _x] != '╗' && _level[_y - 1, _x] != '╚' && _level[_y - 1, _x] != '╝') {
+					_y--;
+					arrowKeyPressed = true;
+				}
+				else {
+					_y = _level.Height - 2;
+					arrowKeyPressed = true;
+				}
+				break;
+				case ConsoleKey.DownArrow:
+				if (_level[_y + 1, _x] != '║' && _level[_y + 1, _x] != '═' && _level[_y + 1, _x] != '╔' && _level[_y + 1, _x] != '╗' && _level[_y + 1, _x] != '╚' && _level[_y + 1, _x] != '╝') {
+					_y++;
+					arrowKeyPressed = true;
+				}
+				else {
+					_y = 1;
+					arrowKeyPressed = true;
+				}
+				break;
+				case ConsoleKey.X:
+				ExitGame();
+				break;
+			}
 
-    if (arrowKeyPressed) {
-        moves++;
-    }
+			if (arrowKeyPressed) {
+				moves++;
+				SoundMovement();
 
-    foreach (var flag in _flags) {
-        if (flag.Y == _y && flag.X == _x && flag.Counter >= 0 && !flag.IsCollected) {
-            flag.IsCollected = true;
-        }
-    }
+			}
 
-    foreach (var flag in _flags) {
-        if (arrowKeyPressed) {
-            flag.Counter--;
-        }
-    }
-}
+			foreach (var flag in _flags) {
+				if (flag.Y == _y && flag.X == _x && flag.Counter >= 0 && !flag.IsCollected) {
+					flag.IsCollected = true;
+				}
+			}
+
+			foreach (var flag in _flags) {
+				if (arrowKeyPressed) {
+					flag.Counter--;
+				}
+			}
+		}
 
 		private void FlagUpdate()
 		{
@@ -141,6 +143,7 @@ namespace movePuzzle
 					score++;
 					flag.IsScored = true;
 					IncreaseActiveFlagCounter();
+					SoundCounterUp();
 				}
 
 				// Update flag symbols
@@ -189,7 +192,7 @@ namespace movePuzzle
 				displayMessage = false;
 			}
 			else {
-			_level.RenderLevel();
+				_level.RenderLevel();
 			}
 
 			// Display the current score and moves
@@ -208,7 +211,7 @@ namespace movePuzzle
 			SetDrawPlayer();
 		}
 
-		private void MessageUI(string theMessageIs)
+		private void MessageUI( string theMessageIs )
 		{
 			Console.SetCursorPosition(0, _level.Height);
 			//Console.WriteLine($"SCORE {score:00} | {moves:00} MOVES");
@@ -235,10 +238,10 @@ namespace movePuzzle
 			//Console.SetCursorPosition(0, _level.Height + 6);
 		}
 
-		private void ScoringUiMessage() 
+		private void ScoringUiMessage()
 		{
-				_level.RenderLevel();
-				MessageUI("FLAG COUNTERS++");
+			_level.RenderLevel();
+			MessageUI("FLAG COUNTERS++");
 		}
 
 		private bool EndGame()
@@ -251,7 +254,7 @@ namespace movePuzzle
 			return true;
 		}
 
-		private string EndGameMessage() 
+		private string EndGameMessage()
 		{
 			int AmountOfFlags = _flags.Count;
 
@@ -279,7 +282,7 @@ namespace movePuzzle
 			Console.CursorVisible = false;
 
 			MessageUI(EndGameMessage());
-			
+
 			//Console.WriteLine("[ PLAY AGAIN? Y/N ]");
 			Console.Write("[ ");
 			"PLAY AGAIN?".WriteColored(ConsoleColor.DarkGray);
@@ -312,7 +315,7 @@ namespace movePuzzle
 			}
 		}
 
-		private void ExitGame() 
+		private void ExitGame()
 		{
 			_level.RenderLevel();
 
@@ -343,6 +346,18 @@ namespace movePuzzle
 				Thread.Sleep(150);
 				Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
 			}
+		}
+
+		private void SoundMovement()
+		{
+			Console.Beep(50, 180);
+		}
+
+		private void SoundCounterUp()
+		{
+			Console.Beep(559, 30);
+			Console.Beep(859, 60);
+			Console.Beep(1059, 90);
 		}
 	}
 }
